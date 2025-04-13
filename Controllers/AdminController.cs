@@ -112,56 +112,7 @@ namespace ApiDeEscola.Controllers
             {
                 var funcionario = await _context.Employments.FindAsync(cpf);
 
-                switch (jobs)
-                {
-                    case JobsEnum.Teacher:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Teacher);
-                        break;
-
-                    case JobsEnum.Janitor:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Janitor);
-                        break;
-
-                    case JobsEnum.Monitor:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Monitor);
-                        break;
-
-                    case JobsEnum.Safety:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Safety);
-                        break;
-
-                    case JobsEnum.Children_Counselor:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Children_Counselor);
-                        break;
-
-                    case JobsEnum.Pedagogue:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Pedagogue);
-                        break;
-
-                    case JobsEnum.Cook:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Cook);
-                        break;
-
-                    case JobsEnum.Librarian:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Librarian);
-                        break;
-
-                    case JobsEnum.Director:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Director);
-                        break;
-
-                    case JobsEnum.Coordinator:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Coordinator);
-                        break;
-
-                    case JobsEnum.Deputy_director:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Deputy_director);
-                        break;
-
-                    default:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.None);
-                        funcionario.Salary = 0;
-                        break;
+                
                 }
 
                 _context.Employments.Update(funcionario);
@@ -185,45 +136,7 @@ namespace ApiDeEscola.Controllers
             {
                 var funcionario = await _context.Employments.FindAsync(cpf);
                 
-                switch (jobs)
-                {
-                    case JobsEnum.Teacher:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Teacher);
-                        break;
-
-                    case JobsEnum.Janitor:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Janitor);
-                        break;
-
-                    case JobsEnum.Monitor:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Monitor);
-                        break;
-
-                    case JobsEnum.Safety:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Safety);
-                        break;
-
-                    case JobsEnum.Children_Counselor:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Children_Counselor);
-                        break;
-
-                    case JobsEnum.Pedagogue:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Pedagogue);
-                        break;
-
-                    case JobsEnum.Cook:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Cook);
-                        break;
-
-                    case JobsEnum.Librarian:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Librarian);
-                        break;
-
-                    default:
-                        funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.None);
-                        funcionario.Salary = 0;
-                        break;
-                }
+                 Program.Select(ref funcionario, jobs);
 
                 _context.Employments.Update(funcionario);
 
