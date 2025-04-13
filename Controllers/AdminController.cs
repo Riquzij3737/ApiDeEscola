@@ -34,14 +34,17 @@ namespace ApiDeEscola.Controllers
                 {
                     case "users":
                         _context.RemoveRange(_context.Users);
+                        await _context.SaveChangesAsync();
                         return Ok("Deu certo paizão");
 
                     case "employments":
                         _context.RemoveRange(_context.Employments);
+                        await _context.SaveChangesAsync();
                         return Ok("Deu certo paizão");
                     default:
                         return NotFound("Q poha é essa?");
                 }
+                
             }
             catch (Exception ex)
             {
@@ -113,7 +116,7 @@ namespace ApiDeEscola.Controllers
                 var funcionario = await _context.Employments.FindAsync(cpf);
 
                 
-                }
+                
 
                 _context.Employments.Update(funcionario);
 

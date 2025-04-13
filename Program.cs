@@ -90,51 +90,51 @@ namespace ApiDeEscola
             switch (jobs)
             {
                 case JobsEnum.Teacher:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Teacher);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Teacher) ?? "Teacher";
                     break;
 
                 case JobsEnum.Janitor:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Janitor);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Janitor) ?? "Janitor";
                     break;
 
                 case JobsEnum.Monitor:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Monitor);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Monitor) ?? "Monitor";
                     break;
 
                 case JobsEnum.Safety:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Safety);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Safety) ?? "Safety";
                     break;
 
                 case JobsEnum.Children_Counselor:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Children_Counselor);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Children_Counselor) ?? "Children_Counselor";
                     break;
 
                 case JobsEnum.Pedagogue:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Pedagogue);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Pedagogue) ?? "Pedagogue";
                     break;
 
                 case JobsEnum.Cook:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Cook);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Cook) ?? "Cook";
                     break;
 
                 case JobsEnum.Librarian:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Librarian);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Librarian) ?? "Librarian";
                     break;
 
                 case JobsEnum.Director:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Director);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Director) ?? "Director";
                     break;
 
                 case JobsEnum.Coordinator:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Coordinator);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Coordinator) ?? "Coordinator";
                     break;
 
                 case JobsEnum.Deputy_director:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Deputy_director);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.Deputy_director) ?? "Deputy_director";
                     break;
 
                 default:
-                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.None);
+                    funcionario.Role = Enum.GetName<JobsEnum>(JobsEnum.None) ?? "None"; 
                     funcionario.Salary = 0;
                     break;
 
