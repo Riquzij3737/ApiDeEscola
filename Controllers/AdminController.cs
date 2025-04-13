@@ -115,8 +115,7 @@ namespace ApiDeEscola.Controllers
             {
                 var funcionario = await _context.Employments.FindAsync(cpf);
 
-                
-                
+                Program.Select(ref funcionario, jobs);
 
                 _context.Employments.Update(funcionario);
 

@@ -57,9 +57,8 @@ namespace ApiDeEscola.Controllers
             }
         }
 
-        [HttpDelete]
-        [Route("{CPF}")]
-        public async Task<IActionResult> DeleteForCPF([FromRoute]string cpf)
+        [HttpDelete]        
+        public async Task<IActionResult> DeleteForCPF([FromQuery]string cpf)
         {
             if (String.IsNullOrWhiteSpace(cpf)) { return BadRequest(); } else
             {

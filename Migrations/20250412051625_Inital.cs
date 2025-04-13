@@ -18,7 +18,7 @@ namespace ApiDeEscola.Migrations
                 name: "Employments",
                 columns: table => new
                 {
-                    CPF = table.Column<string>(type: "VARCHAR(11)", nullable: false)
+                    CPF = table.Column<string>(type: "VARCHAR(45)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "TEXT", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),

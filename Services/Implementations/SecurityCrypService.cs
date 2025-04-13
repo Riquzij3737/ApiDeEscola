@@ -15,7 +15,7 @@ namespace ApiDeEscola.Services.Implementations
 
         public string EncryptData(string text)
         {
-            byte[] textoembytes = Encoding.ASCII.GetBytes(text);
+            byte[] textoembytes = Encoding.UTF8.GetBytes(text);
 
             using (var aes = Aes.Create())
             {
@@ -28,19 +28,19 @@ namespace ApiDeEscola.Services.Implementations
                 {
                     using (CryptoStream cs = new CryptoStream(ms,aes.CreateEncryptor(), CryptoStreamMode.Write))
                     {
-                        cs.Write(textoembytes);
+                        cs.Write(textoembytes, 0, textoembytes.Length);
 
                         cs.FlushFinalBlock();
                     }
 
-                    return Encoding.ASCII.GetString(ms.ToArray());
+                    return Convert.ToBase64String(ms.ToArray());
                 }
             }
         }
 
         public string DecryptData(string text)
         {
-            byte[] textoembytes = Encoding.ASCII.GetBytes(text);
+            byte[] textoembytes = Convert.FromBase64String(text);
 
             using (var aes = Aes.Create())
             {
@@ -49,11 +49,11 @@ namespace ApiDeEscola.Services.Implementations
                 aes.Mode = this.Keys.mode;
                 aes.Padding = this.Keys.padding;
 
-                using (MemoryStream ms = new MemoryStream())
+                using (MemoryStream ms = new MemoryStream(textoembytes))
                 {
                     using (CryptoStream cs = new CryptoStream(ms, aes.CreateDecryptor(), CryptoStreamMode.Read))
                     {
-                        using (StreamReader sr = new StreamReader(ms))
+                        using (StreamReader sr = new StreamReader(cs, Encoding.UTF8))
                         {
                             return sr.ReadToEnd();
                         }

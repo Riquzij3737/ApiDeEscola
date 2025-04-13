@@ -5,6 +5,7 @@ using ApiDeEscola.Models.Enums;
 using ApiDeEscola.Services.ConfigServices;
 using ApiDeEscola.Services.ExtensionServices;
 using ApiDeEscola.Services.Implementations;
+using ApiDeEscola.Models.KeyAnomymus;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -14,10 +15,11 @@ namespace ApiDeEscola
     public class Program
     {
         public static void Main(string[] args)
-        {
+        {            
+
             var builder = WebApplication.CreateBuilder(args);
-            var connstr = builder.Configuration.GetConnectionString("DefaultConnection");
             var cnfg = new jwtService(builder.Configuration);
+            var connstr = builder.Configuration.GetConnectionString("DefaultConnection");         
 
             // Add services to the container.            
             builder.Services.AddControllers();

@@ -31,19 +31,22 @@ namespace ApiDeEscola.Controllers
         public async Task<IActionResult> GetUsersAsync(Guid? Id = null, string? cpf = null)
         {
             if (Id == null)
-            {
-                var senhas = _context.Users.ToListAsync().Result.Select(x => x.password).ToArray();
+            {                
                 var userdescp = await _context.Users.ToListAsync();
+                List<UsersModel> models = new List<UsersModel>();
 
                 foreach (var ss in userdescp)
                 {
-                    foreach (var t in senhas)
+                    models.Add(new UsersModel()
                     {
-                        ss.password = _crypservice.DecryptData(t);
-                    }
+                        Id = ss.Id,
+                        Name = ss.Name,
+                        Emaíl = ss.Emaíl,
+                        password = _crypservice.DecryptData(ss.password)
+                    });
                 }
 
-                return Ok(userdescp);
+                return Ok(models);
             }
             else
             {
@@ -103,18 +106,18 @@ namespace ApiDeEscola.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> LoginWithUsers([FromBody]UsersModel users, [FromHeader]string Cpf)
+        public async Task<IActionResult> LoginWithUsers([FromQuery]string Nome, [FromQuery]string senha, [FromHeader]string Cpf)
         {
-            if (users == null)
+            if (Nome == null || senha == null)
             {
                 return BadRequest();
             } else
             {
                 try
                 {
-                    var contexto = _context.Users.Where(x => _crypservice.DecryptData(x.password) == users.password).Select(x => x);
+                    var contexto = _context.Users.Where(x => x.password == _crypservice.EncryptData(senha)).Select(x => x);
 
-                    if (!contexto.Any())
+                    if (contexto.Any())
                     {
                         return NotFound("usuario não encontrado");
                     } else
