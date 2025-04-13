@@ -32,7 +32,18 @@ namespace ApiDeEscola.Controllers
         {
             if (Id == null)
             {
-                return Ok(await _context.Users.ToListAsync());
+                var senhas = _context.Users.ToListAsync().Result.Select(x => x.password).ToArray();
+                var userdescp = await _context.Users.ToListAsync();
+
+                foreach (var ss in userdescp)
+                {
+                    foreach (var t in senhas)
+                    {
+                        ss.password = _crypservice.DecryptData(t);
+                    }
+                }
+
+                return Ok(userdescp);
             }
             else
             {
@@ -44,7 +55,7 @@ namespace ApiDeEscola.Controllers
                     Id = UserFind.Id,
                     Name = UserFind.Name,
                     Emaíl = UserFind.Emaíl,
-                    password = UserFind.password,
+                    password = _crypservice.DecryptData(UserFind.password),
                     Employment = Employment
 
                 };
@@ -67,7 +78,7 @@ namespace ApiDeEscola.Controllers
                     Id = model.Id,
                     Name = model.Name,
                     Emaíl = model.Emaíl,
-                    password = model.password
+                    password = _crypservice.EncryptData(model.password)
                 };
 
 
@@ -101,7 +112,7 @@ namespace ApiDeEscola.Controllers
             {
                 try
                 {
-                    var contexto = _context.Users.Where(x => x.password == users.password).Select(x => x);
+                    var contexto = _context.Users.Where(x => _crypservice.DecryptData(x.password) == users.password).Select(x => x);
 
                     if (!contexto.Any())
                     {
@@ -132,7 +143,7 @@ namespace ApiDeEscola.Controllers
         {
             if (!string.IsNullOrWhiteSpace(Nome) || !string.IsNullOrWhiteSpace(Senha))
             {                
-                var usur = _context.Users.Where(x => x.Name == Nome && x.password == Senha).Select(x => x);
+                var usur = _context.Users.Where(x => x.Name == Nome && _crypservice.DecryptData(x.password) == Senha).Select(x => x);
                 var emp = await _context.Employments.Where(x => x.Name == Nome).Select(x => x).SingleAsync();
 
                 try
